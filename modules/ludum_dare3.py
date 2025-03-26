@@ -2,6 +2,7 @@ import requests
 import csv
 import time
 import re
+import argparse
 
 def extract_unique_links(text):
     # Regex pattern to match URLs
@@ -100,5 +101,11 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
     print("Done!")
 
 if __name__ == "__main__":
-    []
-    main()
+    parser = argparse.ArgumentParser(description="Fetch Ludum Dare game data.")
+    parser.add_argument("--event_id", type=int, default=48, help="Ludum Dare event ID >=38 https://ldjam.com/events/ludum-dare/")
+    parser.add_argument("--limit", type=int, default=200, help="Number of games to fetch")
+    parser.add_argument("--output_file", type=str, default="ludum_dare_games.csv", help="Output CSV file")
+
+    args = parser.parse_args()
+    
+    main(event_id=args.event_id, limit=args.limit, output_file=args.output_file)
