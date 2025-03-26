@@ -42,7 +42,7 @@ def save_to_csv(filename, game_data, magic_keys):
         for game in game_data:
             writer.writerow(game)
 
-def main(event_id=48, limit=50, output_file="ludum_dare_games.csv"):
+def main(event_id=48, limit=200, output_file="ludum_dare_games"):
     """Main function to fetch and save Ludum Dare game data."""
     print(f"Fetching top {limit} games for Ludum Dare event {event_id}...")
     game_results = get_game_results(event_id, limit)
@@ -83,7 +83,7 @@ def main(event_id=48, limit=50, output_file="ludum_dare_games.csv"):
     print(f"Saving data to {output_file}...")
 
     magic_keys = sorted(magic_keys)  # Ensure consistent column order
-    save_to_csv(output_file, processed_data, magic_keys)
+    save_to_csv(f"{output_file}_{event_id}.csv", processed_data, magic_keys)
     print("Done!")
 
 if __name__ == "__main__":
