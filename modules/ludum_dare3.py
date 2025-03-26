@@ -33,7 +33,7 @@ def save_to_csv(filename, game_data, magic_keys):
     """Save game data to a CSV file."""
     headers = [
         "id", "name", "author", "slug", "published", "created", "modified", "path", "comments",
-        "game_position", "ludum_dare_version"
+        "game_position", "ludum_dare_version", "data_authors"
     ] + magic_keys
     
     with open(filename, "w", newline="", encoding="utf-8") as file:
@@ -42,7 +42,7 @@ def save_to_csv(filename, game_data, magic_keys):
         for game in game_data:
             writer.writerow(game)
 
-def main(event_id=48, limit=200, output_file="ludum_dare_games"):
+def main(event_id=48, limit=3, output_file="ludum_dare_games"):
     """Main function to fetch and save Ludum Dare game data."""
     print(f"Fetching top {limit} games for Ludum Dare event {event_id}...")
     game_results = get_game_results(event_id, limit)
@@ -60,12 +60,13 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
     for game in game_details:
         magic_data = game.get("magic", {})
         magic_keys.update(magic_data.keys())
+        authors = game.get("meta", "").get("author", "")
 
         game_id = game.get("id", "")
         processed_data.append({
             "id": game.get("id", ""),
             "name": game.get("name", ""),
-            "author": game.get("author", ""),
+            "author": authors,
 
             "game_position": game_positions.get(game_id, ""),  # Append game position
             
@@ -77,6 +78,7 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
             "comments": game.get("comments", ""),
             "ludum_dare_version": event_id,
             **magic_data,
+            "data_authors": f"https://api.ldjam.com/vx/node2/get/{'+'.join(map(str, authors))}"
         })
         time.sleep(0.2)  # Rate limiting
     
