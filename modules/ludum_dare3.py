@@ -41,7 +41,7 @@ def save_to_csv(filename, game_data, magic_keys):
 
     """Save game data to a CSV file."""
     headers = [
-        "id", "name", "author", "team_size", "slug", "published", "created", "modified", "path", "comments",
+        "id", "name", "author", "team_size", "slug", "published", "created", "modified", "comments",
         "game_position", "ludum_dare_version", "data_authors", "game_link", "links_body"
     ] + magic_keys
     
@@ -84,12 +84,11 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
             "published": game.get("published", ""),
             "created": game.get("created", ""),
             "modified": game.get("modified", ""),
-            "path": game.get("path", ""),
+            "game_link": game.get("path", ""),
             "comments": game.get("comments", ""),
             "ludum_dare_version": event_id,
             **magic_data,
             "data_authors": f"https://api.ldjam.com/vx/node2/get/{'+'.join(map(str, authors))}",
-            "game_link": f"https://ldjam.com/events/ludum-dare/{event_id}/{game.get("slug", "")}",
             "links_body": extract_unique_links(game.get("body", "")),
         })
         time.sleep(0.2)  # Rate limiting
@@ -101,4 +100,5 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
     print("Done!")
 
 if __name__ == "__main__":
+    []
     main()
