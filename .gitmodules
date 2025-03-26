@@ -1,3 +1,6 @@
 [submodule "Itchy"]
 	path = Itchy
 	url = https://github.com/TasfiqulTapu/Itchy
+[submodule "result-scraper"]
+	path = result-scraper
+	url = https://github.com/aaFurze/Itch-GameJam-Results-Scraper
