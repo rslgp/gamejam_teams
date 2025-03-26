@@ -1,6 +1,15 @@
 import requests
 import csv
 import time
+import re
+
+def extract_unique_links(text):
+    # Regex pattern to match URLs
+    url_pattern = r'https?://[^\s)"]+'
+    links = re.findall(url_pattern, text)
+    
+    # Return unique links
+    return list(set(links))
 
 def fetch_json(url):
     """Fetch JSON data from a given URL."""
@@ -33,7 +42,7 @@ def save_to_csv(filename, game_data, magic_keys):
     """Save game data to a CSV file."""
     headers = [
         "id", "name", "author", "team_size", "slug", "published", "created", "modified", "path", "comments",
-        "game_position", "ludum_dare_version", "data_authors", "game_link"
+        "game_position", "ludum_dare_version", "data_authors", "game_link", "links_body"
     ] + magic_keys
     
     with open(filename, "w", newline="", encoding="utf-8") as file:
@@ -81,6 +90,7 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
             **magic_data,
             "data_authors": f"https://api.ldjam.com/vx/node2/get/{'+'.join(map(str, authors))}",
             "game_link": f"https://ldjam.com/events/ludum-dare/{event_id}/{game.get("slug", "")}",
+            "links_body": extract_unique_links(game.get("body", "")),
         })
         time.sleep(0.2)  # Rate limiting
     
