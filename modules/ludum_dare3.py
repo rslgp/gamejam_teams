@@ -101,16 +101,16 @@ def main(event_id=48, limit=200, output_file="ludum_dare_games"):
     print("Done!")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Fetch Ludum Dare game data.")
-    parser.add_argument("--event_id", type=int, default=48, help="Ludum Dare event ID >=38 https://ldjam.com/events/ludum-dare/")
-    parser.add_argument("--limit", type=int, default=200, help="Number of games to fetch")
-    parser.add_argument("--output_file", type=str, default="ludum_dare_games.csv", help="Output CSV file")
+    # parser = argparse.ArgumentParser(description="Fetch Ludum Dare game data.")
+    # parser.add_argument("--event_id", type=int, default=48, help="Ludum Dare event ID >=38 https://ldjam.com/events/ludum-dare/")
+    # parser.add_argument("--limit", type=int, default=200, help="Number of games to fetch")
+    # parser.add_argument("--output_file", type=str, default="ludum_dare_games.csv", help="Output CSV file")
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
     
-    main(event_id=args.event_id, limit=args.limit, output_file=args.output_file)
+    # main(event_id=args.event_id, limit=args.limit, output_file=args.output_file)
 
-    # for num in range(50, 57):  # 57 because range() excludes the last number
-    #     main(event_id=num)
-    #     time.sleep(100)
+    for num in range(50-6, 50):  # 57 because range() excludes the last number
+        main(event_id=num)
+        time.sleep(100)
 

@@ -1,0 +1,16 @@
+POSITION TIERS:
+Top 15: 3x multiplier
+Top 25: 1.3x multiplier
+Top 50: 1.1x multiplier
+Top 100: 1.0x multiplier
+Others: 0.7x multiplier
+
+CATEGORY WEIGHTS:
+Fun: 35.0%
+Overall: 30.0%
+Mood: 12.0%
+Graphics: 10.0%
+Innovation: 5.0%
+Audio: 4.0%
+Theme: 3.0%
+Humor: 1.0%
