@@ -109,3 +109,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     main(event_id=args.event_id, limit=args.limit, output_file=args.output_file)
+
+    # for num in range(50, 57):  # 57 because range() excludes the last number
+    #     main(event_id=num)
+    #     time.sleep(100)
+
